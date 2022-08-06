@@ -142,3 +142,20 @@ The Five A's cover Authentication, Authorization, Administration, Audit, and Ana
 1. What is an HSM
 
 2. HSM Configuration Demo - Yubikey HSM and AD CS
+
+# Additional Reading and Resources
+
+<details> 
+<summary> Click here to access resources used for building this project. </summary>
+</br>
+
+
+- **Section 1 Resources**
+    
+    - Resource one
+ 
+- **Section 2 Resources**
+
+    - Resource one
+
+</details>
