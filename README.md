@@ -23,7 +23,7 @@ The Five A's cover Authentication, Authorization, Administration, Audit, and Ana
 
 6. Identity and Access Management Solutions?
 
-#Active Directory Domain Controller
+# Active Directory Domain Controller
 ## Section 2: Project 1: Setup First Identity Solution for Jack's Chiropractic Center
 
 1. Problem: Jack's employees all use credentials that are local on the endpoint they are logging into.
