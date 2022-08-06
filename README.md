@@ -69,8 +69,9 @@ The Five A's cover Authentication, Authorization, Administration, Audit, and Ana
 7. Summary
 
 
-# Active Directory Domain Controller
-## Section 2: Project 1: Setup First Identity Solution for Jack's Chiropractic Center
+## Active Directory Domain Controller
+
+### Section 2: Project 1: Setup First Identity Solution for Jack's Chiropractic Center
 
 1. Introduce the Problem: Jack's employees all use credentials that are local on the endpoint they are logging into.
 2. Introduction to Windows Active Directory
@@ -106,7 +107,7 @@ The Five A's cover Authentication, Authorization, Administration, Audit, and Ana
 5.  CAPolicy.inf file in CA
 
 
-
+## Active Directory Certificate Services
 ### Section 6: Deploy CA Policy CA, and SUB CA
 
 1. Lab Infrastructure
@@ -127,7 +128,7 @@ The Five A's cover Authentication, Authorization, Administration, Audit, and Ana
 5.  On-behalf Enrollment
 6.  Web Enrollment
  
-
+## Smart Card Login for Windows
 ### Section 8: Smart Card based Logon for Windows - PIV
 
 1.  Introduction to Smart Card
@@ -140,7 +141,7 @@ The Five A's cover Authentication, Authorization, Administration, Audit, and Ana
 1. What is OCSP
 2. Configure OCSP in AD
 
-
+## HSM Setup
 ### Section 10: What is HSM - Yubikey HSM
 
 1. What is an HSM
