@@ -6,7 +6,7 @@ AD Basics, PKI,  Smart Card login, Third-Party HSM Lab
 ### Course Objectives 
 
 <details>
-    <summary>Click here to access the section one objectives.</summary>
+    <summary>Click here to access the section objectives.</summary>
 
   <br>
 
@@ -45,8 +45,8 @@ AD Basics, PKI,  Smart Card login, Third-Party HSM Lab
     
     - Complete Project 1 review setup of the Azure IAM Lab Space.
 
-
 </details>
+
 ### Section 1: Introduction
 1. Course Introduction
 2. Course Curriculum
