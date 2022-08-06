@@ -47,6 +47,10 @@ AD Basics, PKI,  Smart Card login, Third-Party HSM Lab
 
 </details>
 
+Slideshow
+
+[Link to Slide Deck](https://google.com)
+
 ### Section 1: Introduction
 1. Course Introduction
 2. Course Curriculum
