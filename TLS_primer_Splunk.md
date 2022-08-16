@@ -84,7 +84,7 @@ Upload the certs to $SPLUNK_HOME/etc/auth/my-certs/ on the splunk hosts and perf
 # Copy over the certificate the the appropriate directory and file
 cat demo-splunk1.crt demo-ca.crt > demo-splunk1.bun.crt && cp demo=splunk1.bun.crt $SPLUNK_HOME/etc/auth/mycerts/cert.pem 
 # 
-cp /home/csoc_ansi/splunk/splunk_certs/"$splunk_server"/"$splunk_server".key $SPLUNK_HOME/etc/auth/mycerts/privkey.pem  
+cp demo-splunk1.key $SPLUNK_HOME/etc/auth/mycerts/privkey.pem  
 ```
 
 Once you are savy enough try implementing an automation via ansible. Your Role tasks should look something like the following:
