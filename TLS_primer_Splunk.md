@@ -1,4 +1,4 @@
-# Ansible-Splunk-Base ./certs/
+# Create a local PKI server and distribute certificates to a demo Splunk server
 
 Authentication of the server (server is who it says it is), and optional authentication of the client are requirements of zero trust architecture. We also want to achieve bulk encryption of data in transit. There are several moving parts, "CA", "keys", "CSRs", and the "certs". We often say "SSL" when we mean "TLS". SSL is effectively deprecated.
 
@@ -79,3 +79,15 @@ openssl x509 -req -in demo-splunk1.csr -CA demo-ca.crt -CAkey demo-ca.key  -extf
 To upload custom SSL certs to install with Splunk for the Web UI (default tcp/8000):
 
 Place public key (PEM format) in certs/cert.pem (include intermediate chain after the public key if available).
+
+```bash
+mkdir $SPLUNK_HOME/etc/auth/mycerts
+cd $SPLUNK_HOME/etc/auth/mycerts
+```
+
+Ensure you add the key and cert to the newly created directory with the following naming convention:
+
+```
+myServerCertificate.pem
+myCACertificate.pem
+```
