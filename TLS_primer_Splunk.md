@@ -45,9 +45,10 @@ CN = demo-splunk1.turnerhomestead.com
 [ req_ext ]
 subjectAltName = @alt_names
 
-[ v3_req ]
+[v3_req]
 subjectAltName = @alt_names
 extendedKeyUsage = serverAuth
+keyUsage = keyEncipherment, dataEncipherment
 
 [ alt_names ]
 DNS.1   = demo-splunk1.turnerhomestead.com
