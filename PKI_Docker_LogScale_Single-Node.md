@@ -161,9 +161,9 @@ TLS_TRUSTSTORE_PASSWORD=your_truststore_password
 TLS_TRUSTSTORE_TYPE=PKCS12
 ```
 
-1. Create a directory on your host system to store the TLS certificates and keys, for example, /home/ubuntu/certs.
+1. Create a directory on your host system to store the TLS certificates and keys, for example, /home/ec2-user/certs.
 
-2. Copy the logsrlife-logscale.crt, logsrlife-logscale.key, demo-ca.crt, keystore.p12, and truststore.p12 files into the /home/ubuntu/certs directory on your host system.
+2. Copy the logsrlife-logscale.crt, logsrlife-logscale.key, demo-ca.crt, keystore.p12, and truststore.p12 files into the /home/ec2-user/certs directory on your host system.
 
 3. Run the Docker container with the updated volume mapping for the TLS certificates:
 
@@ -181,4 +181,5 @@ sudo docker run -d --restart=always \
 ```
 
 This Docker run command maps the /home/ec2/certs directory from your host system to /etc/humio/certs in the Docker container, which makes the TLS certificates and keys available to the LogScale server. The humio.conf file is also mapped from your host system to the container.
-Now, your LogScale server will be configured with the specified TLS settings, and the certificates will be available to the container.
+
+#### Now, your LogScale server will be configured with the specified TLS settings, and the certificates will be available to the container.
