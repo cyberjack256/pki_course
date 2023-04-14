@@ -41,8 +41,7 @@ subjectAltName = @alt_names
 
 [ alt_names ]
 DNS.1   = logshipper-server
-DNS.2   = logshipper-server.logsrlife.example
-IP.1    = 172.16.0.20
+IP.1    = 172.16.0.10
 EOF
 
 ```
@@ -101,7 +100,7 @@ subjectAltName = @alt_names
 [ alt_names ]
 DNS.1   = logscale-server.logsrlife.example
 DNS.2   = logscale-server
-IP.1    = X.X.X.X
+IP.1    = 172.16.0.20:8080
 EOF
 
 ```
@@ -148,7 +147,7 @@ With the keystore and truststore files created, you can now use them in your Log
 # LogScale (Humio) Configuration
 HUMIO_HTTP_BIND=0.0.0.0
 HUMIO_SOCKET_BIND=0.0.0.0
-PUBLIC_URL=http://172.16.0.10:8080
+PUBLIC_URL=http://172.16.0.20:8080
 
 # TLS Configuration
 TLS_SERVER=true
@@ -163,7 +162,7 @@ TLS_TRUSTSTORE_TYPE=PKCS12
 
 1. Create a directory on your host system to store the TLS certificates and keys, for example, /home/ec2-user/certs.
 
-2. Copy the logsrlife-logscale.crt, logsrlife-logscale.key, demo-ca.crt, keystore.p12, and truststore.p12 files into the /home/ec2-user/certs directory on your host system.
+2. Copy the logscale-server.crt, logscale-server.key, demo-ca.crt, keystore.p12, and truststore.p12 files into the /home/ec2-user/certs directory on your host system.
 
 3. Run the Docker container with the updated volume mapping for the TLS certificates:
 
@@ -173,7 +172,7 @@ sudo docker run -d --restart=always \
   -v /opt/data/kafka-data:/kafka-data \
   -v /home/ec2-user/certs:/etc/humio/certs:ro \
   -v /home/ec2-user/humio.conf:/etc/humio/humio.conf:ro \
-  --add-host ip-XXX-XX-X-XX.ec2.internal:127.0.0.1 \
+  --add-host ip-172-16-0-20.ec2.internal:127.0.0.1 \
   --net=host \
   --name=logscale \
   --ulimit="nofile=8192:8192" \
@@ -183,3 +182,8 @@ sudo docker run -d --restart=always \
 This Docker run command maps the /home/ec2/certs directory from your host system to /etc/humio/certs in the Docker container, which makes the TLS certificates and keys available to the LogScale server. The humio.conf file is also mapped from your host system to the container.
 
 #### Now, your LogScale server will be configured with the specified TLS settings, and the certificates will be available to the container.
+
+## Troubleshooting
+
+openssl x509 -in /etc/ec2-user/logscale-server.crt -noout -text
+
