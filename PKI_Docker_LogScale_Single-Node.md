@@ -77,7 +77,7 @@ ST = TX
 L = Austin
 O = LogsRLife
 OU = IT
-CN = logscale-server.logsrlife.example
+CN = 172.16.0.20
 
 [ req_ext ]
 subjectAltName = @alt_names
@@ -88,10 +88,8 @@ extendedKeyUsage = serverAuth
 keyUsage = keyEncipherment, dataEncipherment
 
 [ alt_names ]
-DNS.1   = logscale-server.logsrlife.example
-DNS.2   = logscale-server
 IP.1    = 172.16.0.20
-IP.2    = 172.16.0.20:8080
+URI.1    = https://172.16.0.20:8080
 EOF
 
 ```
