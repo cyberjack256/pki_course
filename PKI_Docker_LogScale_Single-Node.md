@@ -155,7 +155,13 @@ TLS_TRUSTSTORE_PASSWORD=your_truststore_password
 TLS_TRUSTSTORE_TYPE=PKCS12
 ```
 
-```scala
+## LogScale Akka Configuration
+The Akka configuration file, humio-akka-application.conf, is written in the HOCON (Human-Optimized Config Object Notation) format. HOCON is a human-readable data format primarily used for configuration files in the Scala and Java ecosystems. It's a superset of JSON and is designed to be more compact and less verbose than JSON, XML, or other configuration formats. HOCON is used by Akka, Play Framework, and other Lightbend projects.
+
+1. Create a new file called humio-akka-application.conf with the following content:
+
+```bash
+cat > humio-akka-application.conf << EOF
 include "application"
 
 akka {
@@ -169,7 +175,7 @@ akka {
           stores = [
             { type = "PKCS12",
               path = "/etc/humio/certs/keystore.p12",
-              password = "logsrlife"
+              password = "your_keystore_password"
             }
           ]
         }
@@ -177,7 +183,7 @@ akka {
           stores = [
             { type = "PKCS12",
               path = "/etc/humio/certs/truststore.p12",
-              password = "logsrlife"
+              password = "your_truststore_password"
             }
           ]
         }
@@ -186,6 +192,7 @@ akka {
     }
   }
 }
+EOF
 ```
 
 1. Create a directory on your host system to store the TLS certificates and keys, for example, /home/ec2-user/certs.
