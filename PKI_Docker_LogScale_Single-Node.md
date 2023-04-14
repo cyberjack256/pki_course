@@ -228,3 +228,26 @@ This command will verify the LogShipper server private key.
 openssl rsa -in logscale-server.key -check
 ```
 This command will verify the LogScale server private key.
+
+### curl(35) Error
+If you are receiving a curl error (35) from the LogScale Server when executing
+```
+curl https://127.0.0.1:8080
+```
+This indicates that the SSL/TLS handshake between the curl client and the server failed due to a problem with the SSL/TLS certificate or configuration. This may be due to several reasons, such as an invalid or expired SSL/TLS certificate, incorrect configuration of the SSL/TLS settings, or mismatch between the hostname in the certificate and the hostname used to connect to the server.
+
+To troubleshoot the issue, you can try the following steps:
+
+1. Check the certificate details: Verify that the certificate presented by the server is valid and matches the expected details such as the hostname, issuer, and expiration date. You can use the openssl command to view the certificate details:
+```bahs
+openssl s_client -showcerts -connect 127.0.0.1:8080
+```
+This command will connect to the LogScale server on port 8080 and display the certificate details.
+
+2. Check the SSL/TLS configuration: Verify that the SSL/TLS configuration on the server matches the SSL/TLS configuration used by the client. Check that the SSL/TLS protocol version, cipher suite, and other settings are correct.
+
+3. Check the hostname: Verify that the hostname used to connect to the server matches the hostname in the SSL/TLS certificate. If there is a mismatch, you can update the hostname in the certificate or use the correct hostname to connect to the server.
+
+4. Check the firewall settings: Verify that the firewall settings allow traffic to pass through the required ports and protocols.
+
+5. Check the curl settings: Try using the `-k` or `--insecure` option with the curl command to skip the SSL/TLS certificate verification. If the command succeeds with this option, it indicates that there is an issue with the SSL/TLS certificate or configuration.
