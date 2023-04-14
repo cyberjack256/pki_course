@@ -105,8 +105,8 @@ openssl req -new -newkey rsa:2048 -nodes -out logscale-server.csr -keyout logsca
 3. Sign the CSR with the CA to generate a certificate:
 
 ```bash
-openssl x509 -req -in logshipper-server.csr -CA demo-ca.crt -CAkey demo-ca.key -CAcreateserial \
-  -out logshipper-server.crt -days 90 -sha256 -extfile logshipper-server.csr.conf -extensions v3_req
+openssl x509 -req -in logscale-server.csr -CA demo-ca.crt -CAkey demo-ca.key -CAcreateserial \
+  -out logscale-server.crt -days 90 -sha256 -extfile logscale-server.csr.conf -extensions v3_req
 ```
 
 ## Generating the Trust Store
