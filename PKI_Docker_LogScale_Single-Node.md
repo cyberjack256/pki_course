@@ -175,7 +175,7 @@ akka {
           stores = [
             { type = "PKCS12",
               path = "/etc/humio/certs/keystore.p12",
-              password = "your_keystore_password"
+              password = "logsrlife"
             }
           ]
         }
@@ -183,7 +183,7 @@ akka {
           stores = [
             { type = "PKCS12",
               path = "/etc/humio/certs/truststore.p12",
-              password = "your_truststore_password"
+              password = "logsrlife"
             }
           ]
         }
