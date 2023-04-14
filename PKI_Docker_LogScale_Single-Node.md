@@ -293,5 +293,8 @@ This command will connect to the LogScale server on port 8080 and display the ce
 1. Restart container with new settings
 ```bash
 sudo docker restart $(sudo docker ps -a | grep 'logscale' | awk '{print $1}')
-
+```
+2. Print Logs of the container
+```bash
+sudo docker logs $(sudo docker ps -a | grep 'logscale' | awk '{print $1}')
 ```
