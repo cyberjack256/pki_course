@@ -161,7 +161,7 @@ The Akka configuration file, humio-akka-application.conf, is written in the HOCO
 1. Create a new file called humio-akka-application.conf with the following content:
 
 ```bash
-cat > humio-akka-application.conf << EOF
+cat << EOF > humio-akka-application.conf
 include "application"
 
 akka {
@@ -175,7 +175,7 @@ akka {
           stores = [
             { type = "PKCS12",
               path = "/etc/humio/certs/keystore.p12",
-              password = "logsrlife"
+              password = "your_keystore_password"
             }
           ]
         }
@@ -183,7 +183,7 @@ akka {
           stores = [
             { type = "PKCS12",
               path = "/etc/humio/certs/truststore.p12",
-              password = "logsrlife"
+              password = "your_truststore_password"
             }
           ]
         }
