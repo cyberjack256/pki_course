@@ -41,7 +41,7 @@ subjectAltName = @alt_names
 
 [ alt_names ]
 DNS.1   = logshipper-server
-IP.1    = 172.16.0.10
+IP.1    = 172.16.0.20
 EOF
 
 ```
@@ -78,7 +78,7 @@ ST = TX
 L = Austin
 O = LogsRLife
 OU = IT
-CN = 172.16.0.20
+CN = 172.16.0.10
 
 [ req_ext ]
 subjectAltName = @alt_names
@@ -89,8 +89,8 @@ extendedKeyUsage = serverAuth
 keyUsage = keyEncipherment, dataEncipherment
 
 [ alt_names ]
-IP.1    = 172.16.0.20
-URI.1    = https://172.16.0.20:8080
+IP.1    = 172.16.0.10
+URI.1    = https://172.16.0.10:8080
 EOF
 ```
 
@@ -136,7 +136,7 @@ With the keystore and truststore files created, you can now use them in your Log
 # LogScale (Humio) Configuration
 HUMIO_HTTP_BIND=0.0.0.0
 HUMIO_SOCKET_BIND=0.0.0.0
-PUBLIC_URL=https://172.16.0.20:8080
+PUBLIC_URL=https://172.16.0.10:8080
 
 # TLS Configuration
 TLS_SERVER=true
@@ -161,7 +161,7 @@ sudo docker run -d --restart=always \
   -v /opt/data/kafka-data:/kafka-data \
   -v /home/ec2-user/certs:/etc/humio/certs:ro \
   -v /home/ec2-user/humio.conf:/etc/humio/humio.conf:ro \
-  --add-host ip-172-16-0-20.ec2.internal:127.0.0.1 \
+  --add-host ip-172-16-0-10.ec2.internal:127.0.0.1 \
   --net=host \
   --name=logscale \
   --ulimit="nofile=8192:8192" \
