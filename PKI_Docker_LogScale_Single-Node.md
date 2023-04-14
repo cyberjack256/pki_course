@@ -184,6 +184,47 @@ This Docker run command maps the /home/ec2/certs directory from your host system
 #### Now, your LogScale server will be configured with the specified TLS settings, and the certificates will be available to the container.
 
 ## Troubleshooting
+1. Verify the validity of the CA certificate:
+```bash
+openssl x509 -in demo-ca.crt -noout -text
+```
+This command will display the details of the CA certificate. Verify that the certificate's expiry date, subject, and issuer match your expectations.
 
-openssl x509 -in /etc/ec2-user/logscale-server.crt -noout -text
+2. Verify the validity of the LogShipper server certificate:
+```bash
+openssl x509 -in logshipper-server.crt -noout -text
+```
+This command will display the details of the LogShipper server certificate. Verify that the certificate's expiry date, subject, and issuer match your expectations.
 
+3. Verify the validity of the LogScale server certificate:
+```bash
+openssl x509 -in logscale-server.crt -noout -text
+```
+This command will display the details of the LogScale server certificate. Verify that the certificate's expiry date, subject, and issuer match your expectations.
+
+4. Verify the certificate chain:
+```bash
+openssl verify -CAfile demo-ca.crt logshipper-server.crt
+```
+This command will verify the LogShipper server certificate against the CA certificate. Verify that the output shows "OK."
+
+```bash
+openssl verify -CAfile demo-ca.crt logscale-server.crt
+```
+This command will verify the LogScale server certificate against the CA certificate. Verify that the output shows "OK."
+
+5. Verify the private keys:
+```bash
+openssl rsa -in demo-ca.key -check
+```
+This command will verify the CA private key.
+
+```bash
+openssl rsa -in logshipper-server.key -check
+```
+This command will verify the LogShipper server private key.
+
+```bash
+openssl rsa -in logscale-server.key -check
+```
+This command will verify the LogScale server private key.
