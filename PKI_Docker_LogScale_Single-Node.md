@@ -82,6 +82,11 @@ CN = logscale-server.logsrlife.example
 [ req_ext ]
 subjectAltName = @alt_names
 
+[v3_req]
+subjectAltName = @alt_names
+extendedKeyUsage = serverAuth
+keyUsage = keyEncipherment, dataEncipherment
+
 [ alt_names ]
 DNS.1   = logscale-server.logsrlife.example
 DNS.2   = logscale-server
