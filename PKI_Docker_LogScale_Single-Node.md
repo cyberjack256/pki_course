@@ -58,21 +58,6 @@ openssl x509 -req -in logshipper-server.csr -CA demo-ca.crt -CAkey demo-ca.key -
   -out logshipper-server.crt -days 90 -sha256
 ```
 
-## Generating PKI Certificates
-1. Generate a private key and a Certificate Signing Request (CSR) for the service that requires a certificate. For example, to generate a CSR for a web server:
-```bash
-openssl req -new -newkey rsa:2048 -nodes -out logsrlife-logscale-server.csr -keyout logsrlife-logscale-server.key \
-  -config logsrlife-logscale-server.csr.conf
-```
-* This command generates a private key and a CSR based on the configuration file logsrlife-logscale-server.csr.conf. Modify the configuration file to match your organization's details and the service that requires a certificate.
-
-2. Sign the CSR with the CA to generate a certificate:
-
-```bash
-openssl x509 -req -in logsrlife-logscale-server.csr -CA demo-ca.crt -CAkey demo-ca.key -CAcreateserial \
-  -out logsrlife-logscale-server.crt -days 90 -sha256
-```
-
 ### LogScale Server
 
 1. Create the CSR configuration file for the LogScale server:
@@ -100,7 +85,8 @@ subjectAltName = @alt_names
 [ alt_names ]
 DNS.1   = logscale-server.logsrlife.example
 DNS.2   = logscale-server
-IP.1    = 172.16.0.20:8080
+IP.1    = 172.16.0.20
+IP.2    = 172.16.0.20:8080
 EOF
 
 ```
@@ -147,7 +133,7 @@ With the keystore and truststore files created, you can now use them in your Log
 # LogScale (Humio) Configuration
 HUMIO_HTTP_BIND=0.0.0.0
 HUMIO_SOCKET_BIND=0.0.0.0
-PUBLIC_URL=http://172.16.0.20:8080
+PUBLIC_URL=https://172.16.0.20:8080
 
 # TLS Configuration
 TLS_SERVER=true
