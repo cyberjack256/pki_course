@@ -126,14 +126,20 @@ keytool -importcert -file demo-ca.crt -alias demo-ca \
   -storepass logsrlife -noprompt
 ```
 
-This command imports the demo CA certificate into a PKCS12 truststore named truststore.p12. Replace your_truststore_password with a secure password of your choice.
+This command imports the demo CA certificate into a PKCS12 truststore named truststore.p12. Replace your_truststore_password with a secure password of your choice
 
-With the keystore and truststore files created, you can now use them in your LogScale server's configuration to enable secure communication using TLS. Remember to protect the keystore and truststore files, as they contain sensitive information.
 
 ### LogScale Configuration in humio.conf
 
+####Notes:
+-Xmx2g: Sets the maximum heap size for the JVM to 2 gigabytes. The heap size determines the amount of memory available for the JVM to allocate objects.
+-Xms2g: Sets the initial heap size for the JVM to 2 gigabytes. This value determines the initial amount of memory the JVM allocates at startup.
+-XX:+UseG1GC: Enables the G1 (Garbage-First) garbage collector, which is designed for low-latency, high-throughput applications. G1GC is a modern garbage collector that provides better performance compared to older JVM garbage collectors.
+-Dconfig.file=/humio-akka-application.conf: Sets the Akka configuration file to use for LogScale. This is a Java system property that tells Akka where to look for the configuration file.
+
 ```
 # LogScale (Humio) Configuration
+HUMIO_OPTS=-Xmx2g -Xms2g -XX:+UseG1GC -Dconfig.file=/humio-akka-application.conf
 HUMIO_HTTP_BIND=0.0.0.0
 HUMIO_SOCKET_BIND=0.0.0.0
 PUBLIC_URL=https://172.16.0.10:8080
@@ -149,6 +155,39 @@ TLS_TRUSTSTORE_PASSWORD=your_truststore_password
 TLS_TRUSTSTORE_TYPE=PKCS12
 ```
 
+```scala
+include "application"
+
+akka {
+  loglevel = "INFO"
+  log-config-on-start = "on"
+
+  http {
+    server {
+      ssl-config {
+        keyManager = {
+          stores = [
+            { type = "PKCS12",
+              path = "/etc/humio/certs/keystore.p12",
+              password = "logsrlife"
+            }
+          ]
+        }
+        trustManager = {
+          stores = [
+            { type = "PKCS12",
+              path = "/etc/humio/certs/truststore.p12",
+              password = "logsrlife"
+            }
+          ]
+        }
+        protocol = "TLSv1.2"
+      }
+    }
+  }
+}
+```
+
 1. Create a directory on your host system to store the TLS certificates and keys, for example, /home/ec2-user/certs.
 
 2. Copy the logscale-server.crt, logscale-server.key, demo-ca.crt, keystore.p12, and truststore.p12 files into the /home/ec2-user/certs directory on your host system.
@@ -161,8 +200,9 @@ sudo docker run -d --restart=always \
   -v /opt/data/kafka-data:/kafka-data \
   -v /home/ec2-user/certs:/etc/humio/certs:ro \
   -v /home/ec2-user/humio.conf:/etc/humio/humio.conf:ro \
+  -v /home/ec2-user/humio-akka-application.conf:/humio-akka-application.conf:ro \
   --add-host ip-172-16-0-10.ec2.internal:127.0.0.1 \
-  --net=host \
+  -p 8080:8080 \
   --name=logscale \
   --ulimit="nofile=8192:8192" \
   humio/humio:stable
@@ -240,3 +280,11 @@ This command will connect to the LogScale server on port 8080 and display the ce
 4. Check the firewall settings: Verify that the firewall settings allow traffic to pass through the required ports and protocols.
 
 5. Check the curl settings: Try using the `-k` or `--insecure` option with the curl command to skip the SSL/TLS certificate verification. If the command succeeds with this option, it indicates that there is an issue with the SSL/TLS certificate or configuration.
+
+## Docker Commands
+
+1. Restart container with new settings
+```bash
+sudo docker restart $(sudo docker ps -a | grep 'logscale' | awk '{print $1}')
+
+```
