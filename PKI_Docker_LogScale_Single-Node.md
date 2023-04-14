@@ -70,6 +70,7 @@ prompt = no
 default_md = sha256
 req_extensions = req_ext
 distinguished_name = dn
+x509_extensions = v3_req
 
 [ dn ]
 C = US
@@ -82,7 +83,7 @@ CN = 172.16.0.20
 [ req_ext ]
 subjectAltName = @alt_names
 
-[v3_req]
+[ v3_req ]
 subjectAltName = @alt_names
 extendedKeyUsage = serverAuth
 keyUsage = keyEncipherment, dataEncipherment
@@ -91,7 +92,6 @@ keyUsage = keyEncipherment, dataEncipherment
 IP.1    = 172.16.0.20
 URI.1    = https://172.16.0.20:8080
 EOF
-
 ```
 
 2. Generate the private key and CSR for the LogScale server:
