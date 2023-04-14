@@ -115,7 +115,7 @@ openssl x509 -req -in logscale-server.csr -CA demo-ca.crt -CAkey demo-ca.key -CA
 ```bash
 openssl pkcs12 -export -in logscale-server.crt -inkey logscale-server.key \
   -out keystore.p12 -name logscale-server \
-  -passout pass:your_keystore_password
+  -passout pass:logsrlife
 ```
 This command exports the LogScale server's private key and certificate to a PKCS12 keystore named keystore.p12. Replace your_keystore_password with a secure password of your choice.
 
@@ -123,7 +123,7 @@ This command exports the LogScale server's private key and certificate to a PKCS
 ```bash
 keytool -importcert -file demo-ca.crt -alias demo-ca \
   -keystore truststore.p12 -storetype PKCS12 \
-  -storepass your_truststore_password -noprompt
+  -storepass logsrlife -noprompt
 ```
 
 This command imports the demo CA certificate into a PKCS12 truststore named truststore.p12. Replace your_truststore_password with a secure password of your choice.
